@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCL Website</title>
+    <style>
+        /* General body and layout styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('MCLBG.webp'); /* Background image */
+            background-size: cover; /* Cover the entire page */
+            background-position: center;
+            color: #fff; /* White text color for all elements */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Navigation Tab Styles */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 51, 102, 0.7); /* Dark blue with opacity */
+            padding: 15px 0;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .tab {
+            padding: 14px 30px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 18px;
+            background-color: #0073e6; /* Blue background */
+            border: 1px solid #0073e6;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .tab:hover {
+            background-color: #003366; /* Dark blue on hover */
+            transform: scale(1.05); /* Slight scale effect */
+        }
+
+        .tab.active {
+            background-color: #003366; /* Active tab background color */
+        }
+
+        /* Content Section Styling */
+        .section {
+            display: none;
+            padding: 40px 20px;
+            min-height: 80vh;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for readability */
+        }
+
+        .section h1 {
+            font-size: 2.5rem;
+            color: #003366;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Section Specific Styles */
+        .about {
+            background-color: rgba(224, 247, 250, 0.8); /* Light cyan */
+        }
+
+        .assignments {
+            background-color: rgba(241, 248, 233, 0.8); /* Light green */
+        }
+
+        .classes {
+            background-color: rgba(255, 235, 238, 0.8); /* Light pink */
+        }
+
+        .messages {
+            background-color: rgba(255, 245, 238, 0.8); /* Light peach */
+        }
+
+        .grades {
+            background-color: rgba(245, 245, 245, 0.8); /* Light gray */
+        }
+
+        .assist {
+            background-color: rgba(240, 255, 240, 0.8); /* Light lime */
+        }
+
+        .settings {
+            background-color: rgba(240, 240, 255, 0.8); /* Light lavender */
+        }
+
+        .signout {
+            background-color: rgba(255, 228, 225, 0.8); /* Light blush */
+        }
+
+        /* Classes Tab Styling */
+        .box-nav {
+            display: flex;
+            justify-content: space-around; /* Spread the tabs out more */
+            margin-bottom: 20px;
+        }
+
+        .box-nav .tab {
+            background-color: #0073e6;
+            padding: 14px 40px; /* Adjusted padding for larger clickable area */
+            margin: 0 20px; /* Increased spacing between tabs */
+            font-size: 18px;
+        }
+
+        .box-nav .tab:hover {
+            background-color: #003366;
+        }
+
+        .box-nav .tab.active {
+            background-color: #003366;
+        }
+
+        /* Assignment Content */
+        .box-content {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .box-content.active {
+            display: block;
+        }
+
+        /* Expandable Bar Styling */
+        .expandable-bar {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .expandable-bar:hover {
+            background-color: #005b99;
+        }
+
+        .expandable-content {
+            display: none;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .tab {
+                font-size: 16px;
+                padding: 12px 20px;
+            }
+
+            .section {
+                padding: 30px 10px;
+            }
+
+            .box {
+                width: 90%;
+                padding: 30px;
+            }
+        }
+
+        .setting-item {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        .setting-item label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .setting-item select, .setting-item input {
+            padding: 5px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+        <div class="tab" onclick="showSection('about')">MCL Website</div>
+        <div class="tab" onclick="showSection('assignments')">Assignments</div>
+        <div class="tab" onclick="showSection('classes')">Classes</div>
+        <div class="tab" onclick="showSection('messages')">Messages</div>
+        <div class="tab" onclick="showSection('grades')">Grades</div>
+        <div class="tab" onclick="showSection('assist')">Assist</div>
+		<div class="tab" onclick="showSection('calendar')">Calendar</div>
+        <div class="tab" onclick="showSection('settings')">Settings</div>
+        <div class="tab" onclick="showSection('signout')">Sign Out</div>
+		
+    </div>
+
+    <!-- Content Sections -->
+    <div id="about" class="section about">
+        <h1>MCL Website</h1>
+        <p>Welcome to the MCL Website. This is your portal for all the essential resources and information.</p>
+    </div>
+
+    <div id="assignments" class="section assignments">
+        <h1>Assignments</h1>
+		<style>
+        /* Navigation Bar Styles */
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #666; /* Default link color */
+            text-align: center;
+            padding: 20px 30px; /* Increased padding for a bigger nav bar */
+            text-decoration: none;
+            font-size: 18px; /* Increased font size */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        li a:hover {
+            background-color: #003366; /* Dark blue color on hover */
+            color: white; /* Change text color to white on hover */
+        }
+
+        /* Body Styles for Background Image */
+        body {
+            margin: 0;
+            height: 100vh; /* Full height of the viewport */
+            background-image: url('MCLBG.webp'); /* Change to your image URL */
+            background-size: cover; /* Cover the entire area */
+            background-position: center; /* Center the image */
+        }
+
+        /* Box Model Styles */
+        .box {
+            background-color: white; /* Set the background color to white */
+            border: 2px solid darkblue; /* Dark blue border */
+            padding: 20px; /* Padding for more space inside the box */
+            margin: 50px; /* Margin to separate it from other elements */
+            border-radius: 5px; /* Rounded corners for aesthetics */
+            height: 450px; /* Set the box height to 400px */
+            overflow-y: auto; /* Add scroll if content exceeds height */
+        }
+
+        .box h2 {
+            color: darkblue; /* Dark blue text color for headings */
+        }
+
+        .box p {
+            color: #333; /* Dark gray text color for paragraph */
+        }
+
+        /* Navigation Bar Styles for the Box */
+        .box-nav {
+            display: flex; /* Use flexbox for even distribution */
+            justify-content: space-evenly; /* Evenly space the items */
+            align-items: center; /* Center items vertically */
+            margin: 0; /* Reset margin for the box nav */
+            padding: 0; /* Reset padding for the box nav */
+            background-color: #e7f1ff; /* Light blue background */
+            border: 1px solid #ccc; /* Light border for the nav */
+            border-radius: 5px; /* Rounded corners for aesthetics */
+            margin-bottom: 10px; /* Space between nav and content */
+            padding: 5px 0; /* Padding for the nav bar */
+        }
+
+        .box-nav li {
+            flex: 1; /* Allow each item to grow and shrink equally */
+            text-align: center; /* Center text */
+        }
+
+        .box-nav li a {
+            display: block;
+            color: #003366; /* Dark blue text color */
+            text-decoration: none;
+            padding: 10px 15px; /* Smaller padding for box nav */
+            font-size: 16px; /* Font size for box nav */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        .box-nav li a:hover {
+            background-color: #003366; /* Dark blue color on hover */
+            color: white; /* Change text color to white on hover */
+        }
+
+        /* Content section styles */
+        .content {
+            display: none; /* Hide content initially */
+        }
+
+        /* Style for assignment lists */
+        .assignment-list {
+            margin: 10px 0; /* Margin for assignment lists */
+            padding: 0; /* Reset padding for lists */
+            list-style-type: none; /* No bullet points */
+        }
+
+        .assignment-list li {
+            background: #f9f9f9; /* Light background for assignment items */
+            border: 1px solid #ccc; /* Border around each item */
+            border-radius: 3px; /* Rounded corners for items */
+            margin: 5px 0; /* Spacing between items */
+            padding: 8px; /* Padding inside items */
+        }
+
+        /* Collapsible Section Styles */
+        .collapsible {
+            background-color: #e7f1ff; /* Light blue background */
+            border: 1px solid #ccc; /* Border for collapsible section */
+            border-radius: 5px; /* Rounded corners */
+            margin: 5px 0; /* Space between collapsible sections */
+            cursor: pointer; /* Cursor to indicate it's clickable */
+            padding: 10px; /* Padding for collapsible header */
+            text-align: left; /* Align text to left */
+        }
+
+        .content-section {
+            display: none; /* Hidden by default */
+            padding: 10px; /* Padding for the content */
+        }
+    </style>
+<div class="box">
+        <ul class="box-nav">
+            <li><a href="#" onclick="showContent('assignments')">Assignments</a></li>
+            <li><a href="#" onclick="showContent('missing')">Missing</a></li>
+            <li><a href="#" onclick="showContent('completed')">Completed</a></li>
+        </ul>
+
+        <!-- Assignments Section -->
+        <div id="content-assignments" class="content">
+            <h2>Assignments</h2>
+            
+            <div class="collapsible" onclick="toggleSection('thisWeek')">This Week's Assignments</div>
+            <div id="thisWeek" class="content-section">
+                <ul class="assignment-list">
+                    <li>Math Homework - Due: November 10</li>
+                    <li>Science Project - Due: November 15</li>
+                    <li>History Essay - Due: November 20</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleSection('lastWeek')">Last Week's Assignments</div>
+            <div id="lastWeek" class="content-section">
+                <ul class="assignment-list">
+                    <li>English Assignment - Completed: November 1</li>
+                    <li>Math Quiz - Completed: November 2</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleSection('otherAssignments')">Other Assignments</div>
+            <div id="otherAssignments" class="content-section">
+                <ul class="assignment-list">
+                    <li>Art Project - Due: November 30</li>
+                    <li>Geography Homework - Due: December 5</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Missing Assignments Section -->
+        <div id="content-missing" class="content">
+            <h2>Missing Assignments</h2>
+            
+            <div class="collapsible" onclick="toggleSection('missingThisWeek')">This Week's Missing Assignments</div>
+            <div id="missingThisWeek" class="content-section">
+                <ul class="assignment-list">
+                    <li>Math Homework - Due: October 31</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleSection('missingLastWeek')">Last Week's Missing Assignments</div>
+            <div id="missingLastWeek" class="content-section">
+                <ul class="assignment-list">
+                    <li>Science Project - Due: November 5</li>
+                    <li>History Essay - Due: November 6</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleSection('otherMissingAssignments')">Other Missing Assignments</div>
+            <div id="otherMissingAssignments" class="content-section">
+                <ul class="assignment-list">
+                    <li>Art Project - Due: October 25</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Completed Assignments Section -->
+        <div id="content-completed" class="content">
+            <h2>Completed Assignments</h2>
+            
+            <div class="collapsible" onclick="toggleSection('completedThisWeek')">This Week's Completed Assignments</div>
+            <div id="completedThisWeek" class="content-section">
+                <ul class="assignment-list">
+                    <li>Math Homework - Completed: November 1</li>
+                    <li>Science Project - Completed: November 5</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleSection('completedLastWeek')">Last Week's Completed Assignments</div>
+            <div id="completedLastWeek" class="content-section">
+                <ul class="assignment-list">
+                    <li>History Essay - Completed: November 7</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleSection('otherCompletedAssignments')">Other Completed Assignments</div>
+            <div id="otherCompletedAssignments" class="content-section">
+                <ul class="assignment-list">
+                    <li>Geography Project - Completed: November 10</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to show content based on selection
+        function showContent(section) {
+            // Hide all content sections initially
+            var contents = document.querySelectorAll('.content');
+            contents.forEach(function(content) {
+                content.style.display = 'none'; // Hide content
+            });
+
+            // Show the selected content section
+            document.getElementById('content-' + section).style.display = 'block';
+
+            // Hide all collapsible sections initially
+            var collapsibles = document.querySelectorAll('.content-section');
+            collapsibles.forEach(function(collapsible) {
+                collapsible.style.display = 'none'; // Hide collapsible sections
+            });
+        }
+
+        // Function to toggle the display of a section
+        function toggleSection(sectionId) {
+            var content = document.getElementById(sectionId);
+            if (content.style.display === 'block') {
+                content.style.display = 'none'; // Hide section
+            } else {
+                content.style.display = 'block'; // Show section
+            }
+        }
+
+        // Show assignments content by default
+        showContent('assignments');
+    </script>
+    </div>
+
+    <div id="classes" class="section classes">
+        <h1>Your Classes</h1>
+		<style>
+			/* Navigation Bar Styles */
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				border: 1px solid #e7e7e7;
+				background-color: #f3f3f3;
+			}
+
+			li {
+				float: left;
+			}
+
+			li a {
+				display: block;
+				color: #666; /* Default link color */
+				text-align: center;
+				padding: 20px 30px; /* Increased padding for a bigger nav bar */
+				text-decoration: none;
+				font-size: 18px; /* Increased font size */
+				transition: background-color 0.3s; /* Smooth transition */
+			}
+
+			/* Specific style for Home button */
+			li a.home {
+				color: #666; /* Ensure it has the same color as other links */
+				background-color: transparent; /* No background color */
+			}
+
+			li a:hover {
+				background-color: #003366; /* Dark blue color on hover */
+				color: white; /* Change text color to white on hover */
+			}
+
+			li a.active {
+				color: #666; /* Keep the active link color consistent with other links */
+				background-color: transparent; /* No background color for active link */
+			}
+
+			/* Body Styles for Background Image */
+			body {
+				margin: 0;
+				height: auto; /* Changed to auto for flexible height */
+				background-image: url('MCLBG.webp'); /* Change to your image URL */
+				background-size: cover; /* Cover the entire area */
+				background-position: center; /* Center the image */
+				color: #333; /* Text color */
+			}
+
+			/* Subject Styles */
+			.subject {
+				margin: 20px;
+				padding: 20px;
+				background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+				border-radius: 10px; /* Rounded corners */
+				border: 2px solid #003366; /* Blue border */
+				cursor: pointer; /* Change cursor to pointer for subject headers */
+			}
+
+			/* Sub-navigation Bar Styles for Subjects */
+			.subject-nav {
+				list-style-type: none;
+				padding: 0;
+				background-color: #e7e7e7;
+				margin-bottom: 20px;
+				display: none; /* Initially hidden */
+			}
+
+			.subject-nav li {
+				display: inline;
+			}
+
+			.subject-nav li a {
+				padding: 10px 15px;
+			}
+
+			/* Content Sections */
+			.content {
+				display: none; /* Hidden by default */
+				margin-top: 10px;
+				padding: 10px;
+				border: 1px solid #e7e7e7;
+				border-radius: 5px;
+				background-color: #f9f9f9; /* Light background for content */
+			}
+		</style>	
+       		<div class="subject" onclick="toggleNav('math-nav')">
+			<h2>Mathematics</h2>
+			<ul id="math-nav" class="subject-nav">
+				<li><a href="#math-modules" onclick="showContent('math-modules')">Modules</a></li>
+				<li><a href="#math-grades" onclick="showContent('math-grades')">Gradebook</a></li>
+				<li><a href="#math-assignments" onclick="showContent('math-assignments')">Assignments</a></li>
+				<li><a href="#math-messages" onclick="showContent('math-messages')">Messages</a></li>
+				<li><a href="#math-instructors" onclick="showContent('math-instructors')">Instructors</a></li>
+			</ul>
+
+			<div id="math-modules" class="content">Math Modules content goes here.</div>
+			<div id="math-grades" class="content">Math Gradebook content goes here.</div>
+			<div id="math-assignments" class="content">Math Assignments content goes here.</div>
+			<div id="math-messages" class="content">Math Messages content goes here.</div>
+			<div id="math-instructors" class="content">Math Instructors information goes here.</div>
+		</div>
+
+		<div class="subject" onclick="toggleNav('science-nav')">
+			<h2>Science</h2>
+			<ul id="science-nav" class="subject-nav">
+				<li><a href="#science-modules" onclick="showContent('science-modules')">Modules</a></li>
+				<li><a href="#science-grades" onclick="showContent('science-grades')">Gradebook</a></li>
+				<li><a href="#science-assignments" onclick="showContent('science-assignments')">Assignments</a></li>
+				<li><a href="#science-messages" onclick="showContent('science-messages')">Messages</a></li>
+				<li><a href="#science-instructors" onclick="showContent('science-instructors')">Instructors</a></li>
+			</ul>
+
+			<div id="science-modules" class="content">Science Modules content goes here.</div>
+			<div id="science-grades" class="content">Science Gradebook content goes here.</div>
+			<div id="science-assignments" class="content">Science Assignments content goes here.</div>
+			<div id="science-messages" class="content">Science Messages content goes here.</div>
+			<div id="science-instructors" class="content">Science Instructors information goes here.</div>
+		</div>
+
+		<div class="subject" onclick="toggleNav('history-nav')">
+			<h2>History</h2>
+			<ul id="history-nav" class="subject-nav">
+				<li><a href="#history-modules" onclick="showContent('history-modules')">Modules</a></li>
+				<li><a href="#history-grades" onclick="showContent('history-grades')">Gradebook</a></li>
+				<li><a href="#history-assignments" onclick="showContent('history-assignments')">Assignments</a></li>
+				<li><a href="#history-messages" onclick="showContent('history-messages')">Messages</a></li>
+				<li><a href="#history-instructors" onclick="showContent('history-instructors')">Instructors</a></li>
+			</ul>
+
+			<div id="history-modules" class="content">History Modules content goes here.</div>
+			<div id="history-grades" class="content">History Gradebook content goes here.</div>
+			<div id="history-assignments" class="content">History Assignments content goes here.</div>
+			<div id="history-messages" class="content">History Messages content goes here.</div>
+			<div id="history-instructors" class="content">History Instructors information goes here.</div>
+		</div>
+
+		</div>
+		
+		       </div>
+			   
+			   
+			    <div id="assist" class="section assist">
+        <h1>Assist</h1>
+        <p>Get help with assignments, classes, and more.</p>
+		
+		    <style>
+        /* Navigation Bar Styles */
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #666; /* Default link color */
+            text-align: center;
+            padding: 20px 30px; /* Increased padding for a bigger nav bar */
+            text-decoration: none;
+            font-size: 18px; /* Increased font size */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        li a:hover {
+            background-color: #003366; /* Dark blue color on hover */
+            color: white; /* Change text color to white on hover */
+        }
+
+        /* Assistance Tool Styles */
+        #assist-tool {
+            border: 2px solid #003366; /* Dark blue border */
+            padding: 20px; /* Padding inside the assist tool */
+            background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+            border-radius: 10px; /* Rounded corners */
+            width: 80%; /* Width of the assist tool */
+            max-width: 800px; /* Maximum width for larger screens */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
+            margin-top: 20px; /* Space above the assist tool */
+        }
+
+        h2 {
+            text-align: center; /* Center the heading */
+            color: #003366; /* Dark blue color for the heading */
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column; /* Stack form elements vertically */
+            gap: 10px; /* Space between form elements */
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            padding: 10px; /* Padding inside input fields */
+            border: 1px solid #003366; /* Dark blue border for input fields */
+            border-radius: 5px; /* Rounded corners */
+            width: 100%; /* Full width */
+        }
+
+        button {
+            padding: 10px; /* Padding inside button */
+            background-color: #003366; /* Dark blue background for button */
+            color: white; /* White text for button */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        button:hover {
+            background-color: #005580; /* Lighter blue on hover */
+        }
+    </style>
+
+
+    <div id="assist-tool">
+        <h2>Student Assistance Tool</h2>
+        <p>Need help with your studies? Fill out the form below and let us know how we can assist you!</p>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">How can we assist you?</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Submit Request</button>
+        </form>
+    </div>
+				       </div>
+					   
+			    <div id="grades" class="section grades">
+        <h1>Your Grades</h1>
+        <p>View your grades and progress in your courses.</p>
+		<div id="grading-system">
+        <h2>Grading System by Quarter</h2>
+        <table>
+				<style>
+        /* Navigation Bar Styles */
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #666; /* Default link color */
+            text-align: center;
+            padding: 20px 30px; /* Increased padding for a bigger nav bar */
+            text-decoration: none;
+            font-size: 18px; /* Increased font size */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        li a:hover {
+            background-color: #003366; /* Dark blue color on hover */
+            color: white; /* Change text color to white on hover */
+        }
+
+        /* Body Styles for Background Image */
+        body {
+            margin: 0;
+            height: 100vh; /* Full height of the viewport */
+            background-image: url('MCLBG.webp'); /* Change to your image URL */
+            background-size: cover; /* Cover the entire area */
+            background-position: center; /* Center the image */
+        }
+
+        /* Box Model Styles */
+        .box {
+            background-color: white; /* Set the background color to white */
+            border: 2px solid darkblue; /* Dark blue border */
+            padding: 20px; /* Padding for more space inside the box */
+            margin: 50px; /* Margin to separate it from other elements */
+            border-radius: 5px; /* Rounded corners for aesthetics */
+            height: 450px; /* Set the box height to 400px */
+            overflow-y: auto; /* Add scroll if content exceeds height */
+        }
+
+        .box h2 {
+            color: darkblue; /* Dark blue text color for headings */
+        }
+
+        .box p {
+            color: #333; /* Dark gray text color for paragraph */
+        }
+		
+
+        /* Navigation Bar Styles for the Box */
+        .box-nav {
+            display: flex; /* Use flexbox for even distribution */
+            justify-content: space-evenly; /* Evenly space the items */
+            align-items: center; /* Center items vertically */
+            margin: 0; /* Reset margin for the box nav */
+            padding: 0; /* Reset padding for the box nav */
+            background-color: #e7f1ff; /* Light blue background */
+            border: 1px solid #ccc; /* Light border for the nav */
+            border-radius: 5px; /* Rounded corners for aesthetics */
+            margin-bottom: 10px; /* Space between nav and content */
+            padding: 5px 0; /* Padding for the nav bar */
+        }
+
+        .box-nav li {
+            flex: 1; /* Allow each item to grow and shrink equally */
+            text-align: center; /* Center text */
+        }
+
+        .box-nav li a {
+            display: block;
+            color: #003366; /* Dark blue text color */
+            text-decoration: none;
+            padding: 10px 15px; /* Smaller padding for box nav */
+            font-size: 16px; /* Font size for box nav */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        .box-nav li a:hover {
+            background-color: #003366; /* Dark blue color on hover */
+            color: white; /* Change text color to white on hover */
+        }
+
+        /* Content section styles */
+        .content {
+            display: none; /* Hide content initially */
+        }
+
+        /* Style for assignment lists */
+        .assignment-list {
+            margin: 10px 0; /* Margin for assignment lists */
+            padding: 0; /* Reset padding for lists */
+            list-style-type: none; /* No bullet points */
+        }
+
+        .assignment-list li {
+            background: #f9f9f9; /* Light background for assignment items */
+            border: 1px solid #ccc; /* Border around each item */
+            border-radius: 3px; /* Rounded corners for items */
+            margin: 5px 0; /* Spacing between items */
+            padding: 8px; /* Padding inside items */
+        }
+
+        /* Collapsible Section Styles */
+        .collapsible {
+            background-color: #e7f1ff; /* Light blue background */
+            border: 1px solid #ccc; /* Border for collapsible section */
+            border-radius: 5px; /* Rounded corners */
+            margin: 5px 0; /* Space between collapsible sections */
+            cursor: pointer; /* Cursor to indicate it's clickable */
+            padding: 10px; /* Padding for collapsible header */
+            text-align: left; /* Align text to left */
+        }
+
+        .content-section {
+            display: none; /* Hidden by default */
+            padding: 10px; /* Padding for the content */
+        }
+		
+		 /* Grading System Styles */
+        #grading-system {
+            border: 2px solid #003366; /* Dark blue border */
+            padding: 20px; /* Padding inside the grading system */
+            background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+            border-radius: 10px; /* Rounded corners */
+            width: 80%; /* Width of the grading system */
+            max-width: 800px; /* Maximum width for larger screens */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
+            margin-top: 20px; /* Space above the grading system */
+        }
+
+        h2 {
+            text-align: center; /* Center the heading */
+            color: #003366; /* Dark blue color for the heading */
+        }
+
+        table {
+            width: 100%; /* Full width of the table */
+            border-collapse: collapse; /* Collapse borders */
+        }
+
+        th, td {
+            border: 1px solid #003366; /* Dark blue border for table cells */
+            padding: 10px; /* Padding inside table cells */
+            text-align: center; /* Center text in cells */
+        }
+
+        th {
+            background-color: #003366; /* Dark blue background for header */
+            color: white; /* White text for header */
+        }
+    </style>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Quarter 1</th>
+                    <th>Quarter 2</th>
+                    <th>Quarter 3</th>
+                    <th>Quarter 4</th>
+                    <th>Final Grade</th> <!-- New Final Grade Column -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mathematics</td>
+                    <td>A</td>
+                    <td>A-</td>
+                    <td>B+</td>
+                    <td>A</td>
+                    <td>A-</td> <!-- Final Grade -->
+                </tr>
+                <tr>
+                    <td>Science</td>
+                    <td>B+</td>
+                    <td>B</td>
+                    <td>A</td>
+                    <td>A-</td>
+                    <td>B+</td> <!-- Final Grade -->
+                </tr>
+                <tr>
+                    <td>History</td>
+                    <td>A-</td>
+                    <td>A</td>
+                    <td>A</td>
+                    <td>B+</td>
+                    <td>A-</td> <!-- Final Grade -->
+                </tr>
+                <tr>
+                    <td>Literature</td>
+                    <td>B</td>
+                    <td>B+</td>
+                    <td>A-</td>
+                    <td>A</td>
+                    <td>B+</td> <!-- Final Grade -->
+                </tr>
+                <tr>
+                    <td>Physical Education</td>
+                    <td>A+</td>
+                    <td>A</td>
+                    <td>A-</td>
+                    <td>A</td>
+                    <td>A</td> <!-- Final Grade -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+		</div>
+
+			    <div id="messages" class="section messages">
+        <h1>Your Messages</h1>
+        <p>Check your recent messages and notifications.</p>
+		<style>
+        /* Messenger Layout */
+        .container {
+            display: flex;
+            flex: 1; /* Allow container to grow and fill remaining space */
+            width: 100%;
+            height: 100%;
+        }
+
+        /* User List Styles */
+        .user-list {
+            width: 30%; /* 30% width for user list */
+            background-color: #fff; /* White background for user list */
+            border-right: 1px solid #e7e7e7; /* Right border */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .user {
+            padding: 15px;
+            border-bottom: 1px solid #e7e7e7; /* Bottom border for each user */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        .user:hover {
+            background-color: #f1f1f1; /* Highlight on hover */
+        }
+
+        /* Messaging Area Styles */
+        .messaging-area {
+            width: 70%; /* 70% width for messaging area */
+            display: flex;
+            flex-direction: column;
+            background-color: #f9f9f9; /* Light gray background for messaging */
+        }
+
+        .message-list {
+            flex: 1; /* Take remaining space */
+            padding: 20px;
+            overflow-y: auto; /* Enable vertical scrolling */
+            border-bottom: 1px solid #e7e7e7; /* Bottom border */
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .message.sent {
+            background-color: #d1e7dd; /* Light green for sent messages */
+            align-self: flex-end; /* Align to right */
+        }
+
+        .message.received {
+            background-color: #f8d7da; /* Light red for received messages */
+            align-self: flex-start; /* Align to left */
+        }
+
+        .input-area {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e7e7e7; /* Top border for input area */
+        }
+
+        .input-area input {
+            flex: 1; /* Take remaining space */
+            padding: 10px;
+            border: 1px solid #e7e7e7; /* Input border */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .input-area button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            background-color: #003366; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        .input-area button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+  <div class="container">
+        <div class="user-list">
+            <div class="user">User 1</div>
+            <div class="user">User 2</div>
+            <div class="user">User 3</div>
+            <div class="user">User 4</div>
+            <div class="user">User 5</div>
+            <div class="user">User 6</div>
+            <div class="user">User 7</div>
+        </div>
+
+        <div class="messaging-area">
+            <div class="message-list">
+                <div class="message sent">Hello! How are you?</div>
+                <div class="message received">I'm good, thanks! How about you?</div>
+                <div class="message sent">Doing well, just working on a project.</div>
+            </div>
+            <div class="input-area">
+                <input type="text" placeholder="Type your message here..." />
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+	            </div>
+        </div>
+    </div>
+			   
+
+
+    <div id="settings" class="section settings">
+        <h1>Settings</h1>
+        <p>Update your personal settings and preferences.</p>
+    <style>
+        /* Default Styles */
+        body {
+            margin: 0;
+            height: 100vh; /* Full height of the viewport */
+            font-family: Arial, sans-serif; /* Set default font */
+            background-color: #f3f3f3; /* Light background for default theme */
+            color: #333; /* Default text color */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition for color change */
+        }
+
+        /* Navigation Bar Styles */
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #666; /* Default link color */
+            text-align: center;
+            padding: 20px 30px; /* Increased padding for a bigger nav bar */
+            text-decoration: none;
+            font-size: 18px; /* Increased font size */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        li a:hover {
+            background-color: #003366; /* Dark blue color on hover */
+            color: white; /* Change text color to white on hover */
+        }
+
+        /* System Settings Box Styles */
+        .system-settings {
+            border: 5px solid darkblue; /* Dark blue border */
+            border-radius: 10px; /* Rounded corners */
+            background-color: white; /* White background */
+            padding: 20px; /* Inner padding */
+            max-width: 400px; /* Max width of the box */
+            margin: 20px auto; /* Center it with margin */
+            text-align: center; /* Center text */
+        }
+
+        h2 {
+            color: darkblue; /* Dark blue heading */
+        }
+
+        label {
+            display: block; /* Block display for labels */
+            margin: 10px 0; /* Margin around labels */
+        }
+
+        select, input[type="checkbox"], input[type="password"] {
+            margin-top: 5px; /* Space between the select/checkbox and label */
+            margin-bottom: 15px; /* Space below the select/checkbox */
+            width: 100%; /* Full width */
+            padding: 8px; /* Padding for input fields */
+        }
+
+        button {
+            background-color: darkblue; /* Button color */
+            color: white; /* Text color */
+            padding: 10px 15px; /* Padding for button */
+            border: none; /* Remove default border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            width: 100%; /* Full width */
+        }
+
+        button:hover {
+            background-color: #003366; /* Darker blue on hover */
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode .system-settings {
+            background-color: #444;
+            border-color: #fff;
+        }
+
+        .dark-mode h2 {
+            color: #f1f1f1;
+        }
+
+        .dark-mode label {
+            color: #f1f1f1;
+        }
+
+        .dark-mode input[type="password"], .dark-mode select {
+            background-color: #555;
+            color: white;
+            border: 1px solid #777;
+        }
+
+        .dark-mode button {
+            background-color: #003366;
+        }
+    </style>
+
+    <div class="system-settings">
+        <h2>System Settings</h2>
+        <form id="settingsForm">
+            <label for="themeSelect">Select Theme:</label>
+            <select id="themeSelect" name="themeSelect">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="colorful">Colorful</option>
+            </select>
+
+            <label>
+                <input type="checkbox" id="notifications" name="notifications">
+                Enable notifications
+            </label>
+
+            <label for="visibilitySelect">Profile Visibility:</label>
+            <select id="visibilitySelect" name="visibilitySelect">
+                <option value="public">Public</option>
+                <option value="friends">Friends Only</option>
+                <option value="private">Private</option>
+            </select>
+
+            <label for="languageSelect">Language:</label>
+            <select id="languageSelect" name="languageSelect">
+                <option value="english">English</option>
+                <option value="spanish">Spanish</option>
+                <option value="french">French</option>
+            </select>
+
+            <label for="currentPassword">Current Password:</label>
+            <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter current password" required>
+
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password" required>
+
+            <button type="submit">Save Settings</button>
+        </form>
+    </div>
+
+    <script>
+        // Check if the user has a saved theme preference in localStorage
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no preference
+            applyTheme(savedTheme);
+            document.getElementById('themeSelect').value = savedTheme;
+        };
+
+        // Function to apply the selected theme
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            localStorage.setItem('theme', theme); // Save the theme in localStorage
+        }
+
+        // Listen for changes in the theme select dropdown and apply the theme
+        document.getElementById('themeSelect').addEventListener('change', function() {
+            const theme = this.value;
+            applyTheme(theme);
+        });
+
+        // Form submission handler
+        document.getElementById('settingsForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+            
+            // Collect settings values
+            const theme = document.getElementById('themeSelect').value;
+            const notifications = document.getElementById('notifications').checked;
+            const visibility = document.getElementById('visibilitySelect').value;
+            const language = document.getElementById('languageSelect').value;
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            // For demonstration purposes, logging settings to console
+            console.log("Theme:", theme);
+            console.log("Notifications enabled:", notifications);
+            console.log("Profile Visibility:", visibility);
+            console.log("Language:", language);
+            console.log("Current Password:", currentPassword);
+            console.log("New Password:", newPassword);
+
+            // Here you would typically send the data to the server to save settings
+            alert("Settings have been saved!");
+        });
+    </script>
+        </div>
+    </div>
+	
+
+    <div id="signout" class="section signout">
+        <h1>Sign Out</h1>
+        <p>You are about to sign out of the website.</p>
+    </div>
+	    </div>
+		    </div>
+			    </div>
+	
+	<div id="calendar" class="section calendar">
+        <h1>Calendar</h1>
+ <h1>TIME TABLE</h1>
+    <table>
+	<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 2px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #343a40;
+        }
+
+        .highlight {
+            background-color: #f8f9fa;
+        }
+
+        .special {
+            background-color: #f0f0f0;
+        }
+    </style>
+        <tr>
+            <th>Day/Period</th>
+			<td class="highlight"><b>Monday</b></td>
+			<td class="highlight"><b>Tuesday</b></td>
+            <td class="highlight"><b>Wednesday</b></td>
+			<td class="highlight"><b>Thursday</b></td>
+            <td class="highlight"><b>Friday</b></td>
+            <td class="highlight"><b>Saturday</b></td>
+        </tr>
+        <tr>
+		<th><br>7:15-8:15</th>
+            
+            <td>   </td>
+            <td>ANM108P - I1202</td>
+            <td>ENT104 - I1202</td>
+            <td>ANM108P-I1202</td>
+			<td>	</td>
+        </tr>
+        <tr>
+			<th><br>8:15-9:15</th>
+            <td>	</td>
+            <td>PARRENO - R314</td>
+            <td>OJT109 - I1202</td>
+            <td>   </td>
+			<td>	</td>
+        </tr>
+        <tr>
+            <th><br>9:15-9:30</th>
+				<td colspan="6" class="special"><b>BREAK</b></td>
+        </tr>
+		<tr>
+            <th><br>9:30-10:30</th>
+			<td>   </td>
+            <td>ENT104 - I1202</td>
+            <td>   </td>
+            <td>   </td>
+            <td>FIL104 - I1202</td>
+        </tr>
+		<tr>
+            <th><br>10:30-11:30</th>
+            <td>   </td>
+            <td>"CORPORAL(R304)"</td>
+            <td>   </td>
+            <td>   </td>
+            <td>HUM102 - I1202</td>
+        </tr>
+		 <tr>
+				<th>11:30-12:30</th>
+				<td colspan="6" class="special"><b>LUNCH</b></td>
+        </tr>
+        <tr>
+            <th><br>12:30-1:30</th>
+            <td>HR12-2 - TRONO</td>
+            <td>	</td>
+			<td>CPG108P-I1202</td>
+			<td>OJT109P - I1202</td>
+			<td>RES106 - I1202</td>
+        </tr>
+        <tr>
+            <th><br>1:30-2:30</th>
+			<td>PEH104 - BARYAYANG</td>
+			<td>	</td>
+			<td>DELOS SANTOS - R212</td>
+			<td>PARRENO</td>
+			<td>	</td>
+        </tr>
+        <tr>
+		    <th><br>2:30-2:45</th>
+			<td colspan="6" class="special"><b>BREAK</b></td>
+        </tr>
+		<tr>
+		    <th><br>2:45-3:45</th>
+			<td>FIL104 - I1202</td>
+			<td>	</td>
+			<td>RES106 - I1202</td>
+			<td>HUM102-I1202</td>
+			<td>CPG108P-I1202</td>
+        </tr>
+				<tr>
+		    <th><br>3:45-4:45</th>
+			<td>CANALQUINTO</td>
+			<td>	</td>
+			<td>LIZASO</td>
+			<td>HUMS</td>
+			<td>	</td>
+        </tr>
+   		</div>
+		
+		       </div>
+			   		       </div>
+
+
+
+			   
+
+
+    <script>
+        // JavaScript can be added here if needed
+        const sendButton = document.querySelector('.input-area button');
+        const messageInput = document.querySelector('.input-area input');
+        const messageList = document.querySelector('.message-list');
+
+        sendButton.addEventListener('click', () => {
+            const messageText = messageInput.value;
+            if (messageText) {
+                const newMessage = document.createElement('div');
+                newMessage.classList.add('message', 'sent');
+                newMessage.textContent = messageText;
+                messageList.appendChild(newMessage);
+                messageInput.value = ''; // Clear input
+                messageList.scrollTop = messageList.scrollHeight; // Scroll to bottom
+            }
+        });
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendButton.click(); // Trigger send on Enter key
+            }
+        });
+    </script>
+            </div>
+        </div>
+    </div>
+		
+
+		
+		
+
+
+
+
+    <script>
+        // JavaScript can be added here if needed
+        const sendButton = document.querySelector('.input-area button');
+        const messageInput = document.querySelector('.input-area input');
+        const messageList = document.querySelector('.message-list');
+
+        sendButton.addEventListener('click', () => {
+            const messageText = messageInput.value;
+            if (messageText) {
+                const newMessage = document.createElement('div');
+                newMessage.classList.add('message', 'sent');
+                newMessage.textContent = messageText;
+                messageList.appendChild(newMessage);
+                messageInput.value = ''; // Clear input
+                messageList.scrollTop = messageList.scrollHeight; // Scroll to bottom
+            }
+        });
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendButton.click(); // Trigger send on Enter key
+            }
+        });
+    </script>
+   
+    <script>
+        // Function to show content based on tab click
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            var activeSection = document.getElementById(sectionId);
+            activeSection.style.display = 'block';
+
+            var tabs = document.querySelectorAll('.tab');
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            var activeTab = Array.from(tabs).find(tab => tab.textContent.toLowerCase() === sectionId);
+            activeTab.classList.add('active');
+        }
+
+        // Function to show assignment tab content
+        function showAssignmentTab(assignmentId) {
+            var assignments = document.querySelectorAll('.box-content');
+            assignments.forEach(function(assignment) {
+                assignment.classList.remove('active');
+            });
+            var activeAssignment = document.getElementById(assignmentId);
+            activeAssignment.classList.add('active');
+
+            var tabs = document.querySelectorAll('.box-nav .tab');
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            var activeTab = Array.from(tabs).find(tab => tab.textContent.toLowerCase() === assignmentId);
+            activeTab.classList.add('active');
+        }
+
+        // Function to show class-specific tabs
+        function showClassTab(tabId) {
+            var classContent = document.querySelectorAll('.box-content');
+            classContent.forEach(function(content) {
+                content.classList.remove('active');
+            });
+            var activeContent = document.getElementById(tabId);
+            activeContent.classList.add('active');
+
+            var tabs = document.querySelectorAll('.box-nav .tab');
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            var activeTab = Array.from(tabs).find(tab => tab.textContent.toLowerCase() === tabId);
+            activeTab.classList.add('active');
+        }
+
+        // Function to toggle between light and dark modes
+        function toggleTheme(selectElement) {
+            const body = document.querySelector('body');
+            const selectedMode = selectElement.value;
+
+            if (selectedMode === 'dark') {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme preferences (Light or Dark) when the page is loaded
+        window.onload = function () {
+            showSection('about'); // Show the 'MCL Website' section by default when the page loads
+
+            const savedTheme = localStorage.getItem('theme') || 'light'; // default to light mode if no preference found
+            const modeToggle = document.getElementById('modeToggle');
+            modeToggle.value = savedTheme; // Set the select option to the saved theme
+            toggleTheme(modeToggle); // Apply the saved theme immediately
+        };
+    </script>
+
+</body>
+</html>
